@@ -8,27 +8,24 @@ import { Toast } from './components/Toast';
 const AppContent: React.FC = () => {
   const { isLoggedIn, websiteStatus, toast } = useApp();
 
-  // 1. If website is disabled (Maintenance Mode), show Maintenance Screen
   if (!websiteStatus.isWebsiteEnabled) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      <div className="min-h-screen bg-surface-base text-slate-200 flex flex-col">
         <MaintenanceScreen />
         <Toast toast={toast} />
       </div>
     );
   }
 
-  // 2. If website is enabled but analyst is not logged in, show Login Screen
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      <div className="min-h-screen bg-surface-base text-slate-200 flex flex-col">
         <LoginScreen />
         <Toast toast={toast} />
       </div>
     );
   }
 
-  // 3. Main Operational Workspace
   return <Workspace />;
 };
 

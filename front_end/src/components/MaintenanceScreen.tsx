@@ -13,108 +13,111 @@ export const MaintenanceScreen: React.FC = () => {
     if (adminPass === 'security101' || adminPass === 'admin') {
       toggleWebsiteStatus(true, '');
       setShowAdminModal(false);
-      showToast('⚡', 'เปิดการใช้งานหน้าเว็ป LogHunter กลับคืนสู่สถานะปกติเรียบร้อย');
+      showToast('⚡', 'เปิดใช้งานเว็ปไซต์เรียบร้อย');
     } else {
-      setErrorMsg('รหัสผ่านปลดล็อกไม่ถูกต้อง');
+      setErrorMsg('รหัสผ่านไม่ถูกต้อง');
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black p-4 overflow-hidden">
-      {/* Cyber Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40"></div>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-surface-base bg-gradient-mesh bg-grid relative overflow-hidden">
+      {/* Decorative orbs */}
+      <div className="orb orb-teal w-[350px] h-[350px] top-10 -right-20 opacity-60" />
+      <div className="orb orb-purple w-[400px] h-[400px] -bottom-32 -left-32 opacity-50" />
 
-      {/* Floating Particles/glow */}
-      <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div className="w-full max-w-lg bg-slate-900/80 backdrop-blur-xl border border-rose-500/30 p-8 rounded-2xl shadow-2xl shadow-rose-950/40 relative z-10 text-center fade-in">
-        {/* Warning Icon */}
-        <div className="inline-flex p-4 bg-rose-950/80 border border-rose-500/40 rounded-2xl text-rose-400 mb-4 animate-pulse">
-          <i className="fa-solid fa-triangle-exclamation text-4xl"></i>
-        </div>
-
-        {/* Status Tag */}
-        <div className="mb-3">
-          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-rose-950/60 border border-rose-900/50 text-rose-400 text-xs font-mono font-bold uppercase tracking-wider">
-            <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-            <span>SYSTEM OFFLINE / UNDER MAINTENANCE</span>
-          </span>
-        </div>
-
-        <h1 className="text-2xl font-bold tracking-wide text-slate-100 mb-2">
-          ระบบปิดการใช้งานหน้าเว็ปชั่วคราว
-        </h1>
-        <p className="text-xs text-rose-400 font-medium mb-4">
-          ศูนย์ปฏิบัติการ LogHunter อยู่ระหว่างระงับการให้บริการ
-        </p>
-
-        {/* Custom Maintenance Message Box */}
-        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4 text-left mb-6 space-y-2">
-          <div className="text-[10px] text-slate-500 uppercase font-mono tracking-wider flex items-center justify-between">
-            <span><i className="fa-solid fa-bullhorn text-amber-400 mr-1.5"></i>ข้อความประกาศจากผู้ดูแลระบบ</span>
-            <span>{websiteStatus.updatedAt}</span>
+      <div className="w-full max-w-md relative z-10 slide-up">
+        <div className="glass-strong rounded-2xl p-8 text-center glow-red">
+          {/* Warning Icon */}
+          <div className="inline-flex p-4 bg-red-500/10 border border-red-500/15 rounded-2xl text-red-400 mb-5 float">
+            <i className="fa-solid fa-triangle-exclamation text-3xl" />
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed font-sans">
-            {websiteStatus.maintenanceMessage || 'ระบบกำลังอยู่ระหว่างปรับปรุงประสิทธิภาพและความมั่นคงปลอดภัย หรือถูกระงับการใช้งานชั่วคราวโดยผู้ดูแลระบบ'}
-          </p>
-        </div>
 
-        {/* Action Button */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          {/* Status */}
+          <div className="mb-4">
+            <span className="inline-flex items-center space-x-2 text-red-400 text-[11px] font-medium code-font bg-red-500/8 px-3 py-1.5 rounded-lg border border-red-500/15">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400 pulse-dot" />
+              <span>SYSTEM OFFLINE</span>
+            </span>
+          </div>
+
+          <h1 className="text-2xl font-bold text-slate-100 mb-2">
+            ระบบปิดชั่วคราว
+          </h1>
+          <p className="text-xs text-slate-500 mb-6">
+            LogHunter อยู่ระหว่างปิดปรับปรุง
+          </p>
+
+          {/* Maintenance Message */}
+          <div className="bg-surface-sunken/80 border border-border-default rounded-xl p-4 text-left mb-6 space-y-2">
+            <div className="text-[10px] text-slate-600 code-font flex items-center justify-between">
+              <span className="flex items-center space-x-1.5">
+                <div className="w-4 h-4 rounded bg-amber-500/10 flex items-center justify-center">
+                  <i className="fa-solid fa-bullhorn text-amber-400 text-[7px]" />
+                </div>
+                <span>ข้อความจากผู้ดูแล</span>
+              </span>
+              <span>{websiteStatus.updatedAt}</span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              {websiteStatus.maintenanceMessage || 'ระบบกำลังปรับปรุงประสิทธิภาพ หรือถูกระงับชั่วคราวโดยผู้ดูแลระบบ'}
+            </p>
+          </div>
+
+          {/* Unlock Button */}
           <button
             onClick={() => setShowAdminModal(true)}
-            className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition duration-150 flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-6 py-3 btn-primary text-white font-medium text-xs rounded-xl cursor-pointer"
           >
-            <i className="fa-solid fa-key text-xs"></i>
-            <span>ปลดล็อกสำหรับผู้ดูแลระบบ (Admin Access)</span>
+            <i className="fa-solid fa-key mr-2" />
+            ปลดล็อกสำหรับผู้ดูแล
           </button>
-        </div>
 
-        <div className="mt-6 pt-4 border-t border-slate-800/80 text-[10px] text-slate-500 font-mono">
-          LogHunter Windows Event Incident Response Platform • v2.0
+          <div className="mt-6 pt-4 border-t border-border-default/30 text-[10px] text-slate-600 code-font flex items-center justify-center space-x-2">
+            <div className="w-3 h-3 bg-gradient-to-br from-teal-600 to-teal-800 rounded flex items-center justify-center">
+              <i className="fa-solid fa-shield-halved text-white text-[5px]" />
+            </div>
+            <span>LogHunter v2.0</span>
+          </div>
         </div>
       </div>
 
       {/* Admin Unlock Modal */}
       {showAdminModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 fade-in">
+          <div className="glass-strong rounded-2xl p-6 w-full max-w-xs shadow-glow slide-up">
             <div className="text-center mb-4">
-              <div className="inline-flex p-2.5 bg-cyan-950 border border-cyan-500/30 rounded-xl text-cyan-400 mb-2">
-                <i className="fa-solid fa-lock-open text-xl"></i>
+              <div className="inline-flex p-3 bg-teal-500/10 border border-teal-500/15 rounded-xl text-teal-400 mb-3 glow-teal-sm">
+                <i className="fa-solid fa-lock-open text-xl" />
               </div>
-              <h3 className="text-sm font-bold text-slate-100">เปิดการใช้งานระบบกลับคืน (Enable Website)</h3>
-              <p className="text-[11px] text-slate-400 mt-1">กรอกรหัสผ่านเพื่อเปิดใช้งานหน้าเว็ปทันที (Demo: security101)</p>
+              <h3 className="text-sm font-semibold text-slate-100">เปิดใช้งานเว็ปไซต์</h3>
+              <p className="text-[11px] text-slate-500 mt-1">กรอกรหัสผ่าน (Demo: security101)</p>
             </div>
 
             {errorMsg && (
-              <div className="mb-3 p-2 bg-rose-950/40 border border-rose-500/30 text-rose-300 text-xs rounded-lg text-center">
+              <div className="mb-3 p-2.5 bg-red-500/8 border border-red-500/15 text-red-400 text-xs rounded-lg text-center fade-in">
                 {errorMsg}
               </div>
             )}
 
             <form onSubmit={handleUnlock} className="space-y-3">
-              <div>
-                <input
-                  type="password"
-                  value={adminPass}
-                  onChange={(e) => {
-                    setAdminPass(e.target.value);
-                    setErrorMsg('');
-                  }}
-                  placeholder="กรอกรหัสผ่านความปลอดภัย..."
-                  className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg py-2 px-3 text-xs text-slate-200"
-                  autoFocus
-                />
-              </div>
+              <input
+                type="password"
+                value={adminPass}
+                onChange={(e) => {
+                  setAdminPass(e.target.value);
+                  setErrorMsg('');
+                }}
+                placeholder="รหัสผ่าน..."
+                className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-xl py-2.5 px-3.5 text-xs text-slate-200 transition-all duration-200 input-glow"
+                autoFocus
+              />
 
-              <div className="flex gap-2 pt-1">
+              <div className="flex gap-2.5">
                 <button
                   type="submit"
-                  className="flex-1 bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold text-xs py-2 rounded-lg transition"
+                  className="flex-1 btn-primary text-white font-medium text-xs py-2.5 rounded-xl cursor-pointer"
                 >
-                  ยืนยันเปิดใช้งานเว็ป
+                  ยืนยัน
                 </button>
                 <button
                   type="button"
@@ -123,7 +126,7 @@ export const MaintenanceScreen: React.FC = () => {
                     setErrorMsg('');
                     setAdminPass('');
                   }}
-                  className="px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 rounded-lg transition"
+                  className="px-4 bg-surface-overlay hover:bg-border-subtle text-slate-300 text-xs py-2.5 rounded-xl transition-all duration-200 cursor-pointer border border-border-default"
                 >
                   ยกเลิก
                 </button>

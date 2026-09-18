@@ -18,88 +18,97 @@ export const LoginScreen: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center relative bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black p-4 min-h-screen overflow-hidden">
-      {/* Cyber grid background animation effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40"></div>
+    <div className="flex-1 flex items-center justify-center p-4 min-h-screen bg-surface-base bg-gradient-mesh bg-grid relative overflow-hidden">
+      {/* Decorative orbs */}
+      <div className="orb orb-teal w-[400px] h-[400px] -top-32 -left-32" />
+      <div className="orb orb-purple w-[300px] h-[300px] bottom-20 -right-20" />
+      <div className="orb orb-blue w-[250px] h-[250px] bottom-[-60px] left-1/3" />
 
-      <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-8 rounded-2xl shadow-2xl relative z-10 fade-in">
-        <div className="text-center mb-8">
-          <div className="inline-flex p-3 bg-cyan-950/80 border border-cyan-500/30 rounded-xl text-cyan-400 mb-3 animate-pulse">
-            <i className="fa-solid fa-shield-halved text-3xl"></i>
-          </div>
-          <h1 className="text-2xl font-bold tracking-wider text-cyan-400">LOGHUNTER</h1>
-          <p className="text-xs text-slate-400 mt-1 font-light">
-            Windows Event Incident Response Platform
-          </p>
-        </div>
-
-        {/* Login Feedback Alert */}
-        {errorMsg && (
-          <div className="mb-4 p-3 bg-rose-950/40 border border-rose-500/30 text-rose-300 rounded-lg text-xs flex items-center space-x-2 fade-in">
-            <i className="fa-solid fa-triangle-exclamation"></i>
-            <span>{errorMsg}</span>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
-              ชื่อผู้ใช้งาน (Analyst ID)
-            </label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
-                <i className="fa-solid fa-user-shield text-xs"></i>
-              </span>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                  setErrorMsg('');
-                }}
-                required
-                className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg py-2.5 pl-9 pr-4 text-sm text-slate-200"
-                placeholder="กรอกรหัสประจำตัวนักวิเคราะห์..."
-              />
+      <div className="w-full max-w-sm relative z-10 slide-up">
+        <div className="glass-strong rounded-2xl p-8 glow-teal-sm">
+          {/* Brand */}
+          <div className="mb-8">
+            <div className="flex items-center space-x-3 mb-5">
+              <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-700 rounded-xl flex items-center justify-center shadow-lg glow-teal-sm">
+                <i className="fa-solid fa-shield-halved text-white text-sm" />
+              </div>
+              <div>
+                <h1 className="text-base font-bold text-slate-100 tracking-wide">LogHunter</h1>
+                <p className="text-[11px] text-slate-500">Forensic Analysis Platform</p>
+              </div>
             </div>
+            <div className="h-px bg-gradient-to-r from-transparent via-border-strong to-transparent" />
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
-              รหัสผ่านส่วนบุคคล
-            </label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
-                <i className="fa-solid fa-key text-xs"></i>
-              </span>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setErrorMsg('');
-                }}
-                required
-                className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg py-2.5 pl-9 pr-4 text-sm text-slate-200"
-                placeholder="กรอกรหัสผ่านเข้าระบบ..."
-              />
+          {/* Error Alert */}
+          {errorMsg && (
+            <div className="mb-5 p-3 bg-red-500/8 border border-red-500/15 text-red-400 rounded-lg text-xs flex items-center space-x-2 fade-in glow-red">
+              <i className="fa-solid fa-circle-xmark text-[11px]" />
+              <span>{errorMsg}</span>
             </div>
-          </div>
+          )}
 
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-slate-950 font-bold py-2.5 rounded-lg transition duration-150 shadow-lg shadow-cyan-950/30 text-sm cursor-pointer"
-            >
-              <i className="fa-solid fa-unlock-keyhole mr-1.5"></i> เข้าสู่ศูนย์ปฏิบัติการ
-            </button>
-          </div>
-        </form>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-xs text-slate-400 mb-2 font-medium">
+                ชื่อผู้ใช้งาน
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                  <i className="fa-solid fa-user text-xs" />
+                </span>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    setErrorMsg('');
+                  }}
+                  required
+                  className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/60 focus:outline-none rounded-lg py-2.5 pl-10 pr-3 text-sm text-slate-200 transition duration-200 input-glow"
+                  placeholder="Analyst ID..."
+                />
+              </div>
+            </div>
 
-        <div className="mt-6 text-center">
-          <span className="text-[10px] text-slate-500 uppercase tracking-widest bg-slate-950/50 border border-slate-800 px-2.5 py-1 rounded">
-            Demo Mode: {credentials.username} / {credentials.password}
-          </span>
+            <div>
+              <label className="block text-xs text-slate-400 mb-2 font-medium">
+                รหัสผ่าน
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                  <i className="fa-solid fa-lock text-xs" />
+                </span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setErrorMsg('');
+                  }}
+                  required
+                  className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/60 focus:outline-none rounded-lg py-2.5 pl-10 pr-3 text-sm text-slate-200 transition duration-200 input-glow"
+                  placeholder="Password..."
+                />
+              </div>
+            </div>
+
+            <div className="pt-1">
+              <button
+                type="submit"
+                className="w-full btn-primary text-white font-semibold py-3 rounded-xl text-sm cursor-pointer"
+              >
+                <i className="fa-solid fa-arrow-right-to-bracket mr-2" />
+                เข้าสู่ระบบ
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-6 pt-4 border-t border-border-default/50 text-center">
+            <span className="text-[11px] text-slate-500">
+              Demo: <span className="text-slate-400 code-font">{credentials.username}</span> / <span className="text-slate-400 code-font">{credentials.password}</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>

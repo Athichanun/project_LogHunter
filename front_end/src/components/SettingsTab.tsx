@@ -49,53 +49,64 @@ export const SettingsTab: React.FC = () => {
     e.preventDefault();
     toggleWebsiteStatus(isWebEnabled, maintMsg.trim());
     if (isWebEnabled) {
-      showToast('🌐', 'เปิดการใช้งานหน้าเว็ปตามปกติเรียบร้อย');
+      showToast('🌐', 'เปิดใช้งานเว็ปไซต์เรียบร้อย');
     } else {
-      showToast('🚨', 'ปิดการใช้งานหน้าเว็ป: ระบบเข้าสู่โหมดปิดปรับปรุงชั่วคราว');
+      showToast('🚨', 'ปิดเว็ปไซต์ — เข้าสู่โหมดปิดปรับปรุง');
     }
   };
 
   return (
     <div className="space-y-6">
-      <div className="border-b border-slate-800 pb-4">
-        <h2 className="text-lg font-bold text-slate-200">
-          ⚙️ ตั้งค่าส่วนตัวและศูนย์ปฏิบัติการ (System Configuration)
-        </h2>
-        <p className="text-xs text-slate-400 mt-1">
-          ตั้งค่าบัญชีความปลอดภัย เปลี่ยนรหัสผ่านความมั่นคง กำหนดค่าเครื่องมือสแกน และควบคุมการเปิด/ปิดหน้าเว็ป
-        </p>
+      {/* Header */}
+      <div className="pb-4">
+        <div className="flex items-center space-x-3 mb-1.5">
+          <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+            <i className="fa-solid fa-sliders text-teal-400 text-xs" />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold text-slate-100">
+              ตั้งค่าระบบ
+            </h2>
+            <p className="text-xs text-slate-500">
+              จัดการบัญชี, รหัสผ่าน, AI Engine, และสถานะเว็ปไซต์
+            </p>
+          </div>
+        </div>
+        <div className="h-px bg-gradient-to-r from-teal-500/20 via-border-default to-transparent mt-3" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Account profile management */}
-        <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <h3 className="text-sm font-bold text-slate-200 flex items-center space-x-2 border-b border-slate-800/80 pb-2">
-            <i className="fa-solid fa-id-card text-cyan-400"></i>
-            <span>ข้อมูลบัญชีนักวิเคราะห์ (Analyst Profile)</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Account Profile */}
+        <div className="glass rounded-xl p-6 space-y-5">
+          <h3 className="text-sm font-semibold text-slate-200 flex items-center space-x-2.5 border-b border-border-default/50 pb-3">
+            <div className="w-7 h-7 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+              <i className="fa-solid fa-id-card text-teal-400 text-[10px]" />
+            </div>
+            <span>ข้อมูลนักวิเคราะห์</span>
           </h3>
 
           <form onSubmit={handleProfileSubmit} className="space-y-4">
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
-                ชื่อประจำตัววิเคราะห์ (Analyst Name ID)
+              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+                ชื่อผู้ใช้
               </label>
               <input
                 type="text"
                 value={usernameInput}
                 onChange={(e) => setUsernameInput(e.target.value)}
                 required
-                className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg px-3 py-2 text-xs text-slate-200"
+                className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-lg px-3.5 py-2.5 text-xs text-slate-200 transition-all duration-200 input-glow"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
-                บทบาท/ระดับสิทธิการวิเคราะห์ (Privilege Role)
+              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+                บทบาท
               </label>
               <select
                 value={roleInput}
                 onChange={(e) => setRoleInput(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg px-3 py-2 text-xs text-slate-300"
+                className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-lg px-3.5 py-2.5 text-xs text-slate-300 transition-all duration-200 input-glow"
               >
                 <option value="L1 Security Analyst">L1 Security Analyst</option>
                 <option value="L2 Incident Responder">L2 Incident Responder</option>
@@ -104,27 +115,29 @@ export const SettingsTab: React.FC = () => {
               </select>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-1">
               <button
                 type="submit"
-                className="bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold text-xs py-2 px-4 rounded-lg transition duration-150 cursor-pointer shadow-md"
+                className="btn-primary text-white font-medium text-xs py-2.5 px-5 rounded-xl cursor-pointer"
               >
-                บันทึกโปรไฟล์ใหม่
+                บันทึกโปรไฟล์
               </button>
             </div>
           </form>
         </div>
 
-        {/* Password manager */}
-        <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <h3 className="text-sm font-bold text-slate-200 flex items-center space-x-2 border-b border-slate-800/80 pb-2">
-            <i className="fa-solid fa-key text-amber-400"></i>
-            <span>เปลี่ยนรหัสผ่านเพื่อความปลอดภัย (Authentication Security)</span>
+        {/* Password */}
+        <div className="glass rounded-xl p-6 space-y-5">
+          <h3 className="text-sm font-semibold text-slate-200 flex items-center space-x-2.5 border-b border-border-default/50 pb-3">
+            <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+              <i className="fa-solid fa-key text-amber-400 text-[10px]" />
+            </div>
+            <span>เปลี่ยนรหัสผ่าน</span>
           </h3>
 
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
                 รหัสผ่านปัจจุบัน
               </label>
               <input
@@ -133,28 +146,28 @@ export const SettingsTab: React.FC = () => {
                 onChange={(e) => setOldPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg px-3 py-2 text-xs text-slate-200"
+                className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-lg px-3.5 py-2.5 text-xs text-slate-200 transition-all duration-200 input-glow"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
-                รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)
+              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+                รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)
               </label>
               <input
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="รหัสผ่านเข้าศูนย์ปฏิบัติการใหม่..."
+                placeholder="รหัสผ่านใหม่..."
                 required
-                className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg px-3 py-2 text-xs text-slate-200"
+                className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-lg px-3.5 py-2.5 text-xs text-slate-200 transition-all duration-200 input-glow"
               />
             </div>
 
-            <div className="pt-2">
+            <div className="pt-1">
               <button
                 type="submit"
-                className="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2 px-4 rounded-lg transition duration-150 cursor-pointer shadow-md"
+                className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-medium text-xs py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer hover:shadow-[0_0_20px_rgba(245,158,11,0.25)]"
               >
                 อัปเดตรหัสผ่าน
               </button>
@@ -162,43 +175,40 @@ export const SettingsTab: React.FC = () => {
           </form>
         </div>
 
-        {/* Section: ฟังก์ชั่นเปิด/ปิดการใช้งานหน้าเว็ป (Website Access Control) */}
-        <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-6 space-y-4 md:col-span-2 shadow-lg">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800/80 pb-3 gap-2">
-            <h3 className="text-sm font-bold text-slate-200 flex items-center space-x-2">
-              <i className="fa-solid fa-power-off text-rose-400"></i>
-              <span>ฟังก์ชั่นเปิด/ปิดการใช้งานหน้าเว็ป (Website Access & Maintenance Mode)</span>
+        {/* Website Access Control */}
+        <div className="glass rounded-xl p-6 space-y-5 md:col-span-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border-default/50 pb-3 gap-2">
+            <h3 className="text-sm font-semibold text-slate-200 flex items-center space-x-2.5">
+              <div className="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                <i className="fa-solid fa-power-off text-red-400 text-[10px]" />
+              </div>
+              <span>สถานะเว็ปไซต์</span>
             </h3>
 
-            {/* Current Status Pill */}
-            <div>
-              {websiteStatus.isWebsiteEnabled ? (
-                <span className="inline-flex items-center space-x-1.5 bg-emerald-950/80 border border-emerald-900/50 text-emerald-400 text-[10px] font-bold font-mono px-3 py-1 rounded-full">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>สถานะปัจจุบัน: เปิดใช้งานหน้าเว็ป (ONLINE)</span>
-                </span>
-              ) : (
-                <span className="inline-flex items-center space-x-1.5 bg-rose-950/80 border border-rose-900/50 text-rose-400 text-[10px] font-bold font-mono px-3 py-1 rounded-full">
-                  <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-                  <span>สถานะปัจจุบัน: ปิดการใช้งานหน้าเว็ป (MAINTENANCE)</span>
-                </span>
-              )}
-            </div>
+            {websiteStatus.isWebsiteEnabled ? (
+              <span className="inline-flex items-center space-x-2 text-emerald-400 text-[11px] font-medium bg-emerald-500/8 px-3 py-1.5 rounded-lg border border-emerald-500/15">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot" />
+                <span>Online</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center space-x-2 text-red-400 text-[11px] font-medium bg-red-500/8 px-3 py-1.5 rounded-lg border border-red-500/15">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400 pulse-dot" />
+                <span>Maintenance</span>
+              </span>
+            )}
           </div>
 
-          <p className="text-xs text-slate-400 leading-relaxed">
-            ผู้ดูแลระบบสามารถควบคุมการเปิดหรือปิดการเข้าถึงหน้าเว็ปไซต์ได้ทันที เมื่อปิดการใช้งาน ผู้ใช้ที่เข้ามาจะพบกับหน้าจอแจ้งเตือนปิดปรับปรุงระบบชั่วคราว
+          <p className="text-xs text-slate-500 leading-relaxed">
+            ควบคุมการเปิด/ปิดหน้าเว็ป เมื่อปิดผู้ใช้จะเห็นหน้าจอปิดปรับปรุง
           </p>
 
           <form onSubmit={handleSaveWebsiteStatus} className="space-y-4 pt-1">
-            {/* Toggle Switch */}
-            <div className="bg-slate-950/60 border border-slate-800/80 p-4 rounded-xl flex items-center justify-between">
+            {/* Toggle */}
+            <div className="bg-surface-sunken/80 border border-border-default p-4 rounded-xl flex items-center justify-between">
               <div>
-                <h4 className="text-xs font-bold text-slate-200">สวิตช์เปิด/ปิดหน้าเว็ป</h4>
-                <p className="text-[10px] text-slate-400 mt-0.5">
-                  {isWebEnabled
-                    ? 'เว็ปไซต์เปิดให้บริการแก่ผู้ใช้งานตามปกติ'
-                    : 'เว็ปไซต์ถูกระงับการใช้งานและจะแสดงหน้าต่างปิดปรับปรุง'}
+                <h4 className="text-xs font-medium text-slate-200">เปิด/ปิดเว็ปไซต์</h4>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  {isWebEnabled ? 'เว็ปเปิดให้บริการปกติ' : 'เว็ปถูกระงับชั่วคราว'}
                 </p>
               </div>
 
@@ -206,71 +216,67 @@ export const SettingsTab: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsWebEnabled(!isWebEnabled)}
-                  className={`relative w-12 h-6 rounded-full transition duration-200 shrink-0 cursor-pointer ${
-                    isWebEnabled ? 'bg-emerald-600' : 'bg-rose-600'
+                  className={`relative w-12 h-6 rounded-full transition-all duration-200 shrink-0 cursor-pointer ${
+                    isWebEnabled ? 'bg-emerald-600 glow-teal-sm' : 'bg-red-600 glow-red'
                   }`}
-                  title="สลับสถานะเปิด/ปิดการใช้งานหน้าเว็ป"
                 >
                   <span
-                    className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-slate-100 shadow transition duration-200 transform ${
+                    className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-all duration-200 transform ${
                       isWebEnabled ? 'translate-x-6' : ''
                     }`}
-                  ></span>
+                  />
                 </button>
-                <span
-                  className={`text-xs font-bold uppercase w-16 ${
-                    isWebEnabled ? 'text-emerald-400' : 'text-rose-400'
-                  }`}
-                >
-                  {isWebEnabled ? 'เปิดใช้งาน' : 'ปิดใช้งาน'}
+                <span className={`text-xs font-medium w-14 ${isWebEnabled ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {isWebEnabled ? 'เปิด' : 'ปิด'}
                 </span>
               </div>
             </div>
 
-            {/* Custom Announcement Message */}
+            {/* Maintenance Message */}
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
-                ข้อความแจ้งเตือนเมื่อปิดปรับปรุง (Maintenance Notice)
+              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+                ข้อความแจ้งเตือนเมื่อปิดปรับปรุง
               </label>
               <textarea
                 value={maintMsg}
                 onChange={(e) => setMaintMsg(e.target.value)}
                 rows={2}
-                className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg p-3 text-xs text-slate-200 leading-relaxed"
-                placeholder="ระบุข้อความเหตุผลการปิดปรับปรุงหรือข้อมูลติดต่อผู้ดูแล..."
-              ></textarea>
+                className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-xl p-3.5 text-xs text-slate-200 leading-relaxed transition-all duration-200 input-glow"
+                placeholder="ข้อความหรือเหตุผลการปิดปรับปรุง..."
+              />
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <span className="text-[10px] text-slate-500">
+              <span className="text-[11px] text-slate-600">
                 อัปเดตล่าสุด: {websiteStatus.updatedAt}
               </span>
               <button
                 type="submit"
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-slate-950 font-bold text-xs py-2.5 px-5 rounded-lg transition duration-150 cursor-pointer shadow-md"
+                className="btn-primary text-white font-medium text-xs py-2.5 px-6 rounded-xl cursor-pointer"
               >
-                <i className="fa-solid fa-floppy-disk mr-1.5"></i> บันทึกการตั้งค่าสถานะหน้าเว็ป
+                <i className="fa-solid fa-floppy-disk mr-1.5" /> บันทึก
               </button>
             </div>
           </form>
         </div>
 
-        {/* AI Engine setup */}
-        <div className="bg-slate-900/30 border border-slate-800 rounded-2xl p-6 space-y-4 md:col-span-2">
-          <h3 className="text-sm font-bold text-slate-200 flex items-center space-x-2 border-b border-slate-800/80 pb-2">
-            <i className="fa-solid fa-robot text-emerald-400"></i>
-            <span>การเชื่อมต่อสมองกล AI วิเคราะห์ (AI Cognitive Core)</span>
+        {/* AI Engine */}
+        <div className="glass rounded-xl p-6 space-y-5 md:col-span-2">
+          <h3 className="text-sm font-semibold text-slate-200 flex items-center space-x-2.5 border-b border-border-default/50 pb-3">
+            <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+              <i className="fa-solid fa-robot text-emerald-400 text-[10px]" />
+            </div>
+            <span>AI Engine Configuration</span>
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-3">
-              <p className="text-xs text-slate-400 leading-relaxed">
-                ตามโครงสร้างสากล LogHunter สามารถส่งสตรีมข้อมูลไปวิเคราะห์ประมวลความสุ่มเสี่ยงที่{' '}
-                <strong className="text-slate-300">Gemini API</strong> ได้โดยตรง หากคุณต้องการใช้งานจริง
-                โปรดระบุ API Key ด้านล่างนี้
+            <div className="space-y-4">
+              <p className="text-xs text-slate-500 leading-relaxed">
+                LogHunter สามารถส่งข้อมูลไปวิเคราะห์กับ <strong className="text-slate-300">Gemini API</strong> ได้
+                หากต้องการใช้งาน ระบุ API Key ด้านล่าง
               </p>
               <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">
+                <label className="block text-xs text-slate-400 mb-1.5 font-medium">
                   Gemini API Key
                 </label>
                 <input
@@ -278,15 +284,15 @@ export const SettingsTab: React.FC = () => {
                   value={geminiApiKey}
                   onChange={(e) => setGeminiApiKey(e.target.value)}
                   placeholder="AIzaSy..."
-                  className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500/50 focus:outline-none rounded-lg px-3 py-2 text-xs text-slate-200 font-mono"
+                  className="w-full bg-surface-sunken/80 border border-border-default focus:border-teal-500/50 focus:outline-none rounded-lg px-3.5 py-2.5 text-xs text-slate-200 code-font transition-all duration-200 input-glow"
                 />
               </div>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">
-                  ตัวจับเวลาจำลองวิเคราะห์ (Simulation Scan Delay)
+                <label className="block text-xs text-slate-400 mb-2 font-medium">
+                  Simulation Delay
                 </label>
                 <input
                   type="range"
@@ -295,23 +301,24 @@ export const SettingsTab: React.FC = () => {
                   step="500"
                   value={simDelay}
                   onChange={(e) => setSimDelay(parseInt(e.target.value))}
-                  className="w-full accent-cyan-500 bg-slate-800 h-1.5 rounded-lg appearance-none cursor-pointer"
+                  className="w-full cursor-pointer"
                 />
-                <div className="flex justify-between text-[10px] text-slate-500 mt-1">
-                  <span>รวดเร็ว (0.5 วินาที)</span>
-                  <span className="text-cyan-400 font-bold font-mono">
-                    ปัจจุบัน: {(simDelay / 1000).toFixed(1)}s
+                <div className="flex justify-between text-[11px] text-slate-500 mt-2">
+                  <span>0.5s</span>
+                  <span className="text-teal-400 code-font font-medium bg-teal-500/10 px-2 py-0.5 rounded-md border border-teal-500/15">
+                    {(simDelay / 1000).toFixed(1)}s
                   </span>
-                  <span>เสมือนจริง (3 วินาที)</span>
+                  <span>3.0s</span>
                 </div>
               </div>
 
-              <div className="bg-slate-950/50 border border-slate-900 rounded-xl p-3.5 flex items-start space-x-2.5">
-                <i className="fa-solid fa-circle-info text-cyan-400 text-xs mt-0.5"></i>
-                <div className="text-[10px] text-slate-400 leading-normal">
-                  หากปิดตัวเลือก API Key หรือปล่อยว่างไว้ ระบบ LogHunter จะรันชุดข้อมูลสกัดพฤติกรรมผ่าน{' '}
-                  <strong className="text-slate-300">Heuristics Local Matcher</strong> ในเบราว์เซอร์โดยอัตโนมัติ
+              <div className="bg-surface-sunken/80 border border-border-default rounded-xl p-4 flex items-start space-x-2.5">
+                <div className="w-5 h-5 rounded-md bg-teal-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <i className="fa-solid fa-circle-info text-teal-400 text-[9px]" />
                 </div>
+                <p className="text-[11px] text-slate-500 leading-normal">
+                  หากไม่ระบุ API Key ระบบจะรันด้วย <strong className="text-slate-400">Heuristics Local Matcher</strong> ในเบราว์เซอร์อัตโนมัติ
+                </p>
               </div>
             </div>
           </div>
